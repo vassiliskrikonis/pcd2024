@@ -1,6 +1,13 @@
 import { Circle, Sphere } from "@react-three/drei";
+import { useControls } from "leva";
 
-export function Ball({ half = false, castShadow = false, ...props }) {
+export function Ball({
+  half = false,
+  castShadow = false,
+  envMapIntensity,
+  ...props
+}) {
+  const { color } = useControls("Ball", { color: "#9c3fb4" });
   return (
     <>
       <Sphere
@@ -16,11 +23,21 @@ export function Ball({ half = false, castShadow = false, ...props }) {
         ]}
         {...props}
       >
-        <meshStandardMaterial />
+        <meshStandardMaterial
+          metalness={1}
+          roughness={0.7}
+          color={color}
+          envMapIntensity={envMapIntensity}
+        />
       </Sphere>
       {half ? (
         <Circle castShadow={castShadow} args={[0.2]} rotation-x={Math.PI / 2}>
-          <meshStandardMaterial />
+          <meshStandardMaterial
+            metalness={1}
+            roughness={0.7}
+            color={color}
+            envMapIntensity={envMapIntensity}
+          />
         </Circle>
       ) : null}
     </>
