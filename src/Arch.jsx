@@ -3,7 +3,7 @@ import { folder, useControls } from "leva";
 import { useEffect, useMemo } from "react";
 import * as THREE from "three";
 
-export function Arch({ castShadow = false, src, envMapIntensity, ...props }) {
+export function Arch({ castShadow = false, ...props }) {
   const { nodes } = useGLTF("./model.glb");
   const columnsMeshIds = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17];
   const roofMeshIds = ["18", "18_1", "18_2", "18_3", "18_4", "18_5"];

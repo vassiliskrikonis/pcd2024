@@ -1,6 +1,6 @@
 import { useGLTF } from "@react-three/drei";
 import { useControls } from "leva";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import * as THREE from "three";
 
 export function Column({ castShadow = false, envMapIntensity, ...props }) {

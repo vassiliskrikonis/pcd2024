@@ -9,10 +9,8 @@ import { Arch } from "./Arch";
 import { Column } from "./Column";
 import { Ball } from "./Ball";
 import { useControls } from "leva";
-import { useThree } from "@react-three/fiber";
 
 const App = () => {
-  const values = useControls({ scaleY: 5 });
   const map = useTexture("Textures/moss-300-mm-architextures_grid-01.jpeg");
 
   const controls = useControls("Environment", {
