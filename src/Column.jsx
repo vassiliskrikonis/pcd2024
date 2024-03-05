@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import * as THREE from "three";
 
 export function Column({ castShadow = false, envMapIntensity, ...props }) {
-  const { nodes } = useGLTF("./model.glb");
+  const { nodes } = useGLTF("/column.glb");
   const controls = useControls("Column", {
     color: "#2725ff",
   });
@@ -18,18 +18,15 @@ export function Column({ castShadow = false, envMapIntensity, ...props }) {
     [controls, envMapIntensity]
   );
 
-  const meshes = Array.from({ length: 50 }, (_, index) => (
-    <mesh
-      key={index}
-      castShadow={castShadow}
-      geometry={nodes[index ? `mesh_3_${index}` : "mesh_3"].geometry}
-      material={material}
-    />
-  ));
-
   return (
     <group {...props} dispose={null}>
-      {meshes}
+      <mesh
+        castShadow={castShadow}
+        geometry={nodes.Mesh_29.geometry}
+        material={material}
+      />
     </group>
   );
 }
+
+useGLTF.preload("/column.glb");

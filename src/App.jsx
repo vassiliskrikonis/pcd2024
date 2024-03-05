@@ -7,8 +7,8 @@ import {
 } from "@react-three/drei";
 import { Arch } from "./Arch";
 import { Column } from "./Column";
-import { Ball } from "./Ball";
 import { useControls } from "leva";
+import { Chain } from "./Chain";
 
 const App = () => {
   const map = useTexture("Textures/moss-300-mm-architextures_grid-01.jpeg");
@@ -29,12 +29,12 @@ const App = () => {
 
       <OrbitControls makeDefault />
 
-      <Arch envMapIntensity={envMapIntensity} castShadow />
+      <Arch envMapIntensity={envMapIntensity} castShadow position-x={2} />
       <Arch
         envMapIntensity={envMapIntensity}
         castShadow
         rotation-y={Math.PI / 2}
-        position-x={-2}
+        position-x={-3}
       />
       <Arch
         envMapIntensity={envMapIntensity}
@@ -43,18 +43,8 @@ const App = () => {
         position-y={-2}
       />
       {/* <Arch rotation-y={Math.PI / 4}  rotation-z={3*Math.PI/4} position-y={1} position-z={3} /> */}
-      <Column
-        envMapIntensity={envMapIntensity}
-        castShadow
-        scale={[5, 6, 5]}
-        position-z={-1.7}
-      />
-      <Column envMapIntensity={envMapIntensity} castShadow />
-      <Column envMapIntensity={envMapIntensity} castShadow position-z={0.4} />
-      <Ball envMapIntensity={envMapIntensity} castShadow half />
-      <Ball envMapIntensity={envMapIntensity} castShadow position-y={0.4} />
-      <Ball envMapIntensity={envMapIntensity} castShadow position-y={0.8} />
-      <Ball envMapIntensity={envMapIntensity} castShadow position-y={1.2} />
+      <Column envMapIntensity={envMapIntensity} castShadow position-x={-3} />
+      <Chain position-z={2} />
       <AccumulativeShadows
         position-y={0.01}
         scale={30}
