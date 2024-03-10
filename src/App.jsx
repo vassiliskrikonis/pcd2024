@@ -46,15 +46,15 @@ const App = () => {
         rotation-y={Math.PI / 2}
         position-x={-3}
       />
-      <Arch
+      {/* <Arch
         envMapIntensity={envMapIntensity}
         castShadow
         rotation-y={Math.PI / 4}
         position-y={-2}
-      />
+      /> */}
       {/* <Arch rotation-y={Math.PI / 4}  rotation-z={3*Math.PI/4} position-y={1} position-z={3} /> */}
       <Column envMapIntensity={envMapIntensity} castShadow position-x={-3} />
-      <Chain position-z={2} castShadow />
+      <Chain radius={0.4} position-z={2} castShadow />
       <Floor />
     </>
   );

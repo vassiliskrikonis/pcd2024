@@ -1,7 +1,8 @@
 import { useGLTF } from "@react-three/drei";
 import { useControls } from "leva";
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
 import * as THREE from "three";
+import { RigidBody } from "@react-three/rapier";
 
 export function Column({ castShadow = false, envMapIntensity, ...props }) {
   const { nodes } = useGLTF("/column.glb");
@@ -18,14 +19,35 @@ export function Column({ castShadow = false, envMapIntensity, ...props }) {
     [controls, envMapIntensity]
   );
 
+  const rigidBody = useRef();
+
   return (
-    <group {...props} dispose={null}>
+    <RigidBody ref={rigidBody} {...props}>
       <mesh
         castShadow={castShadow}
         geometry={nodes.Mesh_29.geometry}
         material={material}
+        onClick={() => {
+          const mass = rigidBody.current.mass();
+          rigidBody.current.addForce(
+            {
+              x: 0,
+              y: 10 * mass,
+              z: 0,
+            },
+            true
+          );
+          rigidBody.current.applyTorqueImpulse(
+            {
+              x: 0,
+              y: Math.random() * mass * 3,
+              z: 0,
+            },
+            true
+          );
+        }}
       />
-    </group>
+    </RigidBody>
   );
 }
 

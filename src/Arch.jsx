@@ -1,7 +1,8 @@
 import { Cylinder } from "@react-three/drei";
 import { folder, useControls } from "leva";
-import { useMemo } from "react";
+import { createRef, useEffect, useMemo, useRef } from "react";
 import { Arc } from "./Arc";
+import { CylinderCollider, RigidBody } from "@react-three/rapier";
 import * as THREE from "three";
 
 const toArray = ({ x, y, z }) => [x, y, z];
@@ -58,25 +59,55 @@ export function Arch({ castShadow = false, envMapIntensity, ...props }) {
     });
   }
 
+  const roofRef = useRef();
+  const columnRefs = useRef(
+    Array.from({ length: generalControls.columns }).map(() => createRef())
+  );
+
+  // sleep columns
+  useEffect(() => {
+    roofRef.current.sleep();
+    columnRefs.current.forEach((ref) => {
+      ref.current.sleep();
+    });
+  }, []);
+
   return (
     <group {...props} dispose={null}>
-      <Arc
-        castShadow={castShadow}
+      <RigidBody
+        ref={roofRef}
+        colliders="trimesh"
         position={toArray(roofControls.offset)}
         position-y={roofControls.offset.y + columnControls.height}
-      />
-      {positions.map((p, i) => (
-        <Cylinder
-          key={i}
+      >
+        <Arc
           castShadow={castShadow}
-          args={[
-            columnControls.radius,
-            columnControls.radius,
-            columnControls.height,
-          ]}
-          position={toArray(p)}
-          material={columnMaterial}
+          onClick={() => {
+            const mass = roofRef.current.mass();
+            roofRef.current.applyImpulse({ x: 0, y: 3 * mass, z: 0 }, true);
+          }}
         />
+      </RigidBody>
+      {positions.map((p, i) => (
+        <RigidBody
+          key={i}
+          ref={columnRefs.current[i]}
+          position={toArray(p)}
+          colliders={false}
+        >
+          <Cylinder
+            castShadow={castShadow}
+            args={[
+              columnControls.radius,
+              columnControls.radius,
+              columnControls.height,
+            ]}
+            material={columnMaterial}
+          />
+          <CylinderCollider
+            args={[columnControls.height / 2, columnControls.radius]}
+          />
+        </RigidBody>
       ))}
     </group>
   );

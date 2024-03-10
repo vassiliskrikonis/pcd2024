@@ -5,16 +5,17 @@ Command: npx gltfjsx@6.2.16 public/arc.glb
 
 import { useGLTF } from "@react-three/drei";
 
-export function Arc({ castShadow, ...props }) {
+export function Arc({ castShadow, onClick, ...props }) {
   const { nodes, materials } = useGLTF("/arc.glb");
   return (
-    <group {...props} dispose={null}>
-      <mesh
-        castShadow={castShadow}
-        geometry={nodes.Mesh_12.geometry}
-        material={materials["Screenshot 2023-12-11 at 21.22.50"]}
-      />
-    </group>
+    <mesh
+      castShadow={castShadow}
+      geometry={nodes.Mesh_12.geometry}
+      material={materials["Screenshot 2023-12-11 at 21.22.50"]}
+      onClick={onClick}
+      dispose={null}
+      {...props}
+    />
   );
 }
 

@@ -1,5 +1,6 @@
-import { useTexture } from "@react-three/drei";
+import { Box, useTexture } from "@react-three/drei";
 import { useControls } from "leva";
+import { RigidBody } from "@react-three/rapier";
 
 export function Floor(props) {
   const map = useTexture("Textures/moss-300-mm-architextures_grid-01.jpeg");
@@ -8,15 +9,14 @@ export function Floor(props) {
   });
 
   return (
-    <group {...props}>
-      <mesh receiveShadow position-y={0} rotation-x={-Math.PI * 0.5} scale={30}>
-        <planeGeometry />
+    <RigidBody position={[0, -1 - 0.001, 0]} type="fixed" {...props}>
+      <Box receiveShadow args={[30, 2, 30]}>
         <meshStandardMaterial
           color="greenyellow"
           envMapIntensity={controls.environmentIntensity}
           map={map}
         />
-      </mesh>
-    </group>
+      </Box>
+    </RigidBody>
   );
 }
