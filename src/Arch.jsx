@@ -16,7 +16,7 @@ export function Arch({ castShadow = false, envMapIntensity, ...props }) {
   });
   const columnControls = useControls("Arch", {
     column: folder({
-      color: "#ffef00",
+      color: "#5db1f5",
       metalness: { value: 1, min: 0, max: 1 },
       roughness: { value: 0.3, min: 0, max: 1 },
       radius: 0.05,

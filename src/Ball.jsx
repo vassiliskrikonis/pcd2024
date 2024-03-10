@@ -7,7 +7,7 @@ export const Ball = forwardRef(function Ball(
   { radius = 0.2, half = false, castShadow = false, envMapIntensity, ...props },
   ref
 ) {
-  const { color } = useControls("Ball", { color: "#9c3fb4" });
+  const { color } = useControls("Ball", { color: "#266c43" });
   useEffect(() => {
     // ref.current.sleep();
   }, [ref]);

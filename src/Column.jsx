@@ -7,13 +7,15 @@ import { RigidBody } from "@react-three/rapier";
 export function Column({ castShadow = false, envMapIntensity, ...props }) {
   const { nodes } = useGLTF("/column.glb");
   const controls = useControls("Column", {
-    color: "#2725ff",
+    color: "#9ceb6b",
+    metalness: 0.6,
+    roughness: 0.5,
   });
 
   const material = useMemo(
     () =>
       new THREE.MeshStandardMaterial({
-        color: controls.color,
+        ...controls,
         envMapIntensity,
       }),
     [controls, envMapIntensity]
