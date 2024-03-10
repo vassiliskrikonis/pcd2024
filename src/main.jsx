@@ -9,7 +9,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     {/* TODO use <Center /> */}
     <Canvas shadows camera={{ position: [0, 3, 7] }}>
-      <Physics debug>
+      <Physics>
         <Suspense>
           <App />
         </Suspense>

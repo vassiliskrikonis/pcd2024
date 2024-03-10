@@ -1,22 +1,36 @@
-import { Box, useTexture } from "@react-three/drei";
-import { useControls } from "leva";
+import { Circle, MeshReflectorMaterial } from "@react-three/drei";
+import { LevaInputs, folder, useControls } from "leva";
 import { RigidBody } from "@react-three/rapier";
 
 export function Floor(props) {
-  const map = useTexture("Textures/moss-300-mm-architextures_grid-01.jpeg");
-  const controls = useControls("Floor", {
-    environmentIntensity: 0.1,
+  const mirrorControls = useControls("Floor", {
+    mirror: folder({
+      color: "#bebebe",
+      blur: [0, 0],
+      mixBlur: 1,
+      mixStrength: 1,
+      mixContrast: 1,
+      resolution: 2048,
+      mirror: { type: LevaInputs.SELECT, options: [0, 1], value: 1 },
+      depthScale: 0,
+      minDepthThreshold: 0,
+      maxDepthThreshold: 0,
+      distortion: 1,
+      debug: { type: LevaInputs.SELECT, options: [0, 1, 2, 3, 4], value: 0 },
+      reflectorOffset: 0,
+    }),
   });
 
   return (
-    <RigidBody position={[0, -1 - 0.001, 0]} type="fixed" {...props}>
-      <Box receiveShadow args={[30, 2, 30]}>
-        <meshStandardMaterial
-          color="greenyellow"
-          envMapIntensity={controls.environmentIntensity}
-          map={map}
-        />
-      </Box>
+    <RigidBody
+      position={[0, -0.001, 0]}
+      rotation={[-Math.PI / 2, 0, 0]}
+      type="fixed"
+      {...props}
+    >
+      <Circle receiveShadow args={[22]}>
+        <MeshReflectorMaterial {...mirrorControls} />
+      </Circle>
     </RigidBody>
   );
 }
