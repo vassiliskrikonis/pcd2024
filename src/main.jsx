@@ -5,6 +5,7 @@ import "./index.css";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { Leva } from "leva";
+import { Loader } from "@react-three/drei";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -27,5 +28,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </Suspense>
       </Physics>
     </Canvas>
+    <Loader containerStyles={{ backgroundColor: "#7A96D1" }} />
   </React.StrictMode>
 );
