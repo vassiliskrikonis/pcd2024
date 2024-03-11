@@ -92,7 +92,7 @@ const App = () => {
       <OrbitControls ref={orbitControls} makeDefault />
       <Environment
         ground={{ height: 0, radius: 28, scale: 100 }}
-        files={"kloofendal_48d_partly_cloudy_puresky_2k.exr"}
+        files={"./kloofendal_48d_partly_cloudy_puresky_2k.hdr"}
       />
       <directionalLight
         castShadow
