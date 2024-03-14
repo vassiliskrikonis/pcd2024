@@ -8,7 +8,7 @@ import { useMemo, useRef } from "react";
 import { toArray } from "./utils";
 import { useThree } from "@react-three/fiber";
 
-const App = () => {
+const Scene = () => {
   const controls = useControls("Environment", {
     ambientLight: 1.5,
     envMapIntensity: { value: 0.7, min: 0, max: 12 },
@@ -109,4 +109,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Scene;

@@ -1,11 +1,11 @@
 import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import Scene from "./Scene.jsx";
 import "./index.css";
 import { Canvas } from "@react-three/fiber";
 import { Physics } from "@react-three/rapier";
 import { Leva } from "leva";
-import { Loader } from "@react-three/drei";
+import { LoadingScreen } from "./LoadingScreen.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -23,11 +23,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       }}
     >
       <Physics>
-        <Suspense>
-          <App />
+        <Suspense fallback={null}>
+          <Scene />
         </Suspense>
       </Physics>
     </Canvas>
-    <Loader containerStyles={{ backgroundColor: "#7A96D1" }} />
+    <LoadingScreen />
   </React.StrictMode>
 );
