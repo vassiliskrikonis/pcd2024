@@ -7,10 +7,17 @@ import { Physics } from "@react-three/rapier";
 import { Leva } from "leva";
 import { LoadingScreen } from "./LoadingScreen.jsx";
 
+import { createXRStore, XR } from "@react-three/xr";
+
+const store = createXRStore();
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     {/* TODO use <Center /> */}
     <Leva hidden />
+    <button id="vr-btn" onClick={() => store.enterVR()}>
+      Enter VR
+    </button>
     <Canvas
       shadows
       camera={{
@@ -22,11 +29,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         fov: 75,
       }}
     >
-      <Physics>
-        <Suspense fallback={null}>
-          <Scene />
-        </Suspense>
-      </Physics>
+      <XR store={store}>
+        <Physics>
+          <Suspense fallback={null}>
+            <Scene />
+          </Suspense>
+        </Physics>
+      </XR>
     </Canvas>
     <LoadingScreen />
   </React.StrictMode>

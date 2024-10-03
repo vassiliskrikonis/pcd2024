@@ -7,6 +7,7 @@ import { Floor } from "./Floor";
 import { useMemo, useRef } from "react";
 import { toArray } from "./utils";
 import { useThree } from "@react-three/fiber";
+import { IfInSessionMode } from "@react-three/xr";
 
 const Scene = () => {
   const controls = useControls("Environment", {
@@ -90,11 +91,14 @@ const Scene = () => {
 
   return (
     <>
-      <OrbitControls
-        ref={orbitControls}
-        makeDefault
-        maxDistance={cameraControls.maxDistance}
-      />
+      <IfInSessionMode deny={["immersive-ar", "immersive-vr"]}>
+        <OrbitControls
+          ref={orbitControls}
+          makeDefault
+          maxDistance={cameraControls.maxDistance}
+        />
+      </IfInSessionMode>
+
       <Environment
         ground={{ height: 0, radius: 28, scale: 100 }}
         files={"./kloofendal_48d_partly_cloudy_puresky_2k.hdr"}
